@@ -1,50 +1,150 @@
-# Welcome to your Expo app 👋
+# Store App - React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native application demonstrating authentication, biometric security, product management, and offline functionality using the DummyJSON API.
 
-## Get started
+## Features
 
-1. Install dependencies
+- User authentication with token-based session management
+- Auto-lock functionality after 10 seconds of inactivity or when app goes to background
+- Biometric authentication (Touch ID/Face ID) with password fallback
+- Product listing with category filtering
+- Superadmin capabilities for product management
+- Offline support with persistent caching
+- Pull-to-refresh functionality
+
+## Screens
+
+1. **Login Screen** - Authentication with optional superadmin designation
+2. **All Products Screen** - Complete product catalog with management controls
+3. **Smartphones Screen** - Category-specific product listing
+
+## Tech Stack
+
+- React Native with TypeScript
+- Expo Router for navigation
+- React Query for data fetching and caching
+- Redux Toolkit for state management
+- MMKV for storage
+- Expo Local Authentication for biometrics
+- React Hook Form for form handling
+
+## Setup and Installation
+
+### Installation
+
+1. Clone the repository
+
+   ```bash
+   git clone <repository-url>
+   cd store-app
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the development server
 
    ```bash
-   npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+4. Run on your platform
+   - iOS: `npm run ios`
+   - Android: `npm run android`
+   - Web: `npm run web`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Demo Accounts
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Regular User
 
-## Get a fresh project
+- Username: `emilys`
+- Password: `emilyspass`
+- Permissions: View products only
 
-When you're ready, run:
+### Super Admin
 
-```bash
-npm run reset-project
+- Username: `michaelw`
+- Password: `michaelwpass`
+- Permissions: View and delete products
+
+## Project Structure
+
+```
+src/
+├── api/              API client and endpoints
+├── components/       Reusable UI components
+├── hooks/            Custom React hooks
+├── screens/          Application screens
+├── store/            Redux store and slices
+├── types/            TypeScript type definitions
+└── utils/            Utility functions
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Configuration
 
-## Learn more
+### Category Selection
 
-To learn more about developing your project with Expo, look at the following resources:
+The Smartphones category is used for the category-specific screen.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Superadmin Configuration
 
-## Join the community
+The superadmin user (michaelw) has delete permissions. This can be configured during login.
 
-Join our community of developers creating universal apps.
+### Auto-lock Settings
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Auto-lock timeout is set to 10 seconds and can be modified in `src/hooks/useAutoLock.ts`.
+
+## Offline Functionality
+
+The application handles offline scenarios through:
+
+- Automatic API response caching via React Query
+- Local storage with MMKV
+- Network status detection
+- Background data synchronization
+
+## Security
+
+- Secure token storage
+- Biometric authentication with password fallback
+- Auto-lock on inactivity
+- Session validation
+
+## EAS Build Configuration
+
+The project includes EAS configuration for building preview and development versions.
+
+### Preview Build
+
+```bash
+npm run eas:preview
+```
+
+### Development Build
+
+```bash
+npm run eas:development
+npx expo start --dev-client
+```
+
+### Platform-Specific Builds
+
+```bash
+npm run build:android:preview
+npm run build:ios:preview
+```
+
+## Testing
+
+Install testing dependencies:
+
+```bash
+npm install --save-dev jest @testing-library/react-native @testing-library/jest-native
+```
+
+## License
+
+MIT License
